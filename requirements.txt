@@ -1,3 +1,5 @@
 Flask
 gunicorn
 flask_wtf
+cv2
+math
