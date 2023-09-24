@@ -129,4 +129,4 @@ websocket-client==1.6.3
 Werkzeug==2.3.7
 widgetsnbextension==4.0.9
 WTForms==3.0.1
-anyio==4.0.0
+
