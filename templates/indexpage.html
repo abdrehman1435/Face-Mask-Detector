@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face Mask Detector</title>
+    <style>
+        body{
+        margin: 0px;
+        padding: 0px;
+        color:black;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: aqua;
+        }
+        header.feature-box.right{
+            background-color: indigo;
+            color: white;
+            height:120px;
+            padding: 5px;
+            text-align: left;
+        }
+         header.feature-box.below{
+        height:800px;
+        background-color:darkgreen;
+        margin-top:-30px;
+        background-image:url("../static/images/head.png");
+        background-size:100%;
+        background-position:center;
+        background-repeat: no-repeat;    
+         }
+        li{
+        display:inline-block;
+        background-color:gray;
+        border-radius:10px;
+        padding:10px;
+        margin:10px;
+        }
+        li:hover{
+        background-color:red;
+        margin:10px;
+        }
+        header a{
+        color:white;
+        text-decoration:none;
+        width:100%;
+        }
+        .details{
+        height:80px;
+        margin:40px;
+        padding:0px;
+        font-size:40px;
+        background-color:gray;
+        text-align:center;
+        color:black;
+        }
+         .features{
+        background:white;
+        color:gray;
+        display:flex;
+        flex-direction:row;
+        padding:20px;
+
+        }
+        .features figure
+        {background:pink;
+        width:400px;
+        margin:auto;
+        text-align:center;
+        text-transform:uppercase;
+        }
+        .features figure img{
+        border-radius:10%;
+        width:400px;
+        }
+        div.main{
+        display:flex;
+        margin:40px;
+        letter-spacing:1px;
+        h1, h2, h3, h4, h5, h6 {
+          font-family: "Playfair Display";
+    letter-spacing: 5px;
+        }
+        }
+        .subpart2{
+        text-align:center;
+        text-transform:uppercase;
+        }
+        .subpart2 figure img{
+        border-radius:4%;
+        width:800px;
+        }
+        
+        footer{
+        background-color:black;
+        text-align:center;
+        margin:0px;
+        padding:0px;
+        color:white;
+        font-size:20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="feature-box right">
+        <nav>
+            <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/FrontPage">Video</a></li>
+            <li><a href="/webcam">Live Webcam</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="feature-box below">
+    </header>
+
+
+    <section class="details">
+        <h1>Sample Results</h1>
+
+    </section>
+    <section class="features">    
+        <figure>
+            <img src="../static/images/ex2.png" alt="YOLOv8 Results 1">
+            <figcaption>YOLOv8 Results 1</figcaption>
+        </figure>
+        <figure>
+            <img src="../static/images/ex3.png" alt="YOLOv8 Results 2">
+            <figcaption>YOLOv8 Results 2</figcaption>
+        </figure>
+        <figure>
+            <img src="../static/images/ex4.png" alt="YOLOv8 Results 3">
+            <figcaption>YOLOv8 Results 3</figcaption>
+    </figure>
+    </section>
+    <div class="main">
+        <div class="subpart1">
+            <h1>Object Detection using YOLOv8</h1><br>
+            <h4> FPS of Video</h4>
+            <p>FPS represents the Frame Rate, in case of GPU the FPS will be high while in case of CPU the FPS will be low</p><br>
+            <h4>Shape of Current Frame</h4>
+            <p>The shape of current frame i.e. Resolution will be calculated</p><br>
+            <h4>Detections in Current Frame</h4>
+            <p>Total detections in each of the frame will be calculated</p><br>
+
+        </div>
+
+      <div class="subpart2"><figure>
+      <img src="../static/images/ex2.png"  alt="Image Missing">
+          <figcaption>Sample Results</figcaption>
+        </figure>
+      </div>
+      <div class="subpart1">
+      <h4>Face Mask Detection</h4><br>
+      <p>We detect face masks on the faces of people and we do this 
+        by creating a bounding box around the face mask and display the 
+        confidence level of the detection.
+      </p> <br>
+          <h4>Roboflow Train</h4>
+          <p>Roboflow Train is an AutoML solution that enables you to train a state-of-the-art computer vision model on your dataset. In a few clicks, you can train a computer vision model.
+               <br>
+              When your model has trained, you can run inference using a range of deployment options, including in a web browser and on edge devices like an NVIDIA Jetson.</p>
+      </div>
+  </div>
+</body>
+</html>
