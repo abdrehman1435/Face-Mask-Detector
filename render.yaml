@@ -1,0 +1,10 @@
+services:
+  - type: web
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn dl:app
+    envVars:
+      - key: OPENCV_FFMPEG_CAPTURE_OPTIONS
+        value: videoconvert ! video/x-raw,format=(string)I420 ! videoconvert ! appsink
+      - key: OPENCV_VIDEOIO_PRIORITY_MSMF
+        value: 0
