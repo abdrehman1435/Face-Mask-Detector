@@ -3,3 +3,4 @@ gunicorn
 flask_wtf
 opencv-python
 ultralytics
+ffmpeg
