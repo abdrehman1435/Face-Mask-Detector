@@ -15,7 +15,7 @@ Annotate the images using Roboflow, a tool that helps you label, preprocess, and
 Export your dataset in a format that is compatible with your chosen framework. Roboflow provides ready-to-use export options for YOLOv5, TensorFlow Lite, YOLOv8, and other popular frameworks.
 
 ## Training the model using YOLOv8
-Train the model using YOLOv8, a state-of-the-art object detection model from Ultralytics. You can use the command 'pip install ultralytics and then import YOLO from ultralytics' to download. You also need your computer to have a GPU and you need to download valid NVIDIA device drivers and the CUDA toolkit by NVIDIA to use YOLOv8. You need to change the hardware accelerator to GPU. You need to use the custom dataset option and provide the path to your Roboflow dataset and it's more simpler to do this by mounting your Google Drive. You can use the default settings or adjust them according to your needs. The training process will save the model weights in the runs/train folder. This process is shown in the "FaceMask.ipynb" notebook in the repository.
+Train the model using YOLOv8, a state-of-the-art object detection model from Ultralytics. You can use the command 'pip install ultralytics` and then `import YOLO from ultralytics' to download. You also need your computer to have a GPU and you need to download valid NVIDIA device drivers and the CUDA toolkit by NVIDIA to use YOLOv8. You need to change the hardware accelerator to GPU. You need to use the custom dataset option and provide the path to your Roboflow dataset and it's more simpler to do this by mounting your Google Drive. You can use the default settings or adjust them according to your needs. The training process will save the model weights in the runs/train folder. This process is shown in the "FaceMask.ipynb" notebook in the repository.
 
 ## Alternative training using Roboflow
 The model can also be trained using Roboflow using the Roboflow-train feature. The object can be trained using a pre-trained model like the COCO dataset or you can train your own custom model after exporting your dataset.
@@ -35,18 +35,18 @@ python jetsonInfo.py
 
 ##### Step #2: Run Docker Container
 Next, run the Roboflow Inference Server using the accompanying Docker container:
-`sudo docker run --privileged --net=host --runtime=nvidia --mount source=roboflow,target=/tmp/cache -e NUM_WORKERS=1 roboflow/roboflow-inference-server-jetson-4.5.0:latest`
+```sudo docker run --privileged --net=host --runtime=nvidia --mount source=roboflow,target=/tmp/cache -e NUM_WORKERS=1 roboflow/roboflow-inference-server-jetson-4.5.0:latest```
 
 The docker image you need depends on what Jetpack version you are using.
 + Jetpack 4.5: roboflow/roboflow-inference-server-jetson-4.5.0
 - Jetpack 4.6: roboflow/roboflow-inference-server-jetson-4.6.1
 * Jetpack 5.1: roboflow/roboflow-inference-server-jetson-5.1.1
 
-The Jetson images default to using a CUDA execution provider. To use TensorRT, set the environment variable ONNXRUNTIME_EXECUTION_PROVIDERS=TensorrtExecutionProvider. Note that while using TensorRT can increase performance, it also incurs an additional startup compilation cost.
+The Jetson images default to using a CUDA execution provider. To use TensorRT, set the environment variable ' ONNXRUNTIME_EXECUTION_PROVIDERS=TensorrtExecutionProvider '. Note that while using TensorRT can increase performance, it also incurs an additional startup compilation cost.
 
 ##### Step #3: Use the Server
 You can now use the server to run inference on any of your models. The following command shows the syntax for making a request to the inference API via curl:
-base64 your_img.jpg | curl -d @- "http://localhost:9001/[YOUR MODEL]/[YOUR VERSION]?api_key=[YOUR API KEY]"
+base64  ##your_img.jpg## | curl -d @- "http://localhost:9001/[YOUR MODEL]/[YOUR VERSION]?api_key=[YOUR API KEY]"
 When you send a request for the first time, your model will compile on your Jetson device for 5-10 minutes.
 
 
