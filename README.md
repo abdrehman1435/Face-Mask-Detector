@@ -48,84 +48,6 @@ base64 your_img.jpg | curl -d @- "http://localhost:9001/[YOUR MODEL]/[YOUR VERSI
 When you send a request for the first time, your model will compile on your Jetson device for 5-10 minutes.
 
 
-
-### Deploy the Model to the Luxonis OAK
-The Roboflow Inference Server supports the following devices:
-<ul>
-<li>OAK-D </li>
-<li>>OAK-D-Lite</li>
-<li>OAK-D-POE</li>
-<li>OAK-1 (no depth)</li>
-</ul>
-
-#### Installation
-Install the roboflowoak, depthai, and opencv-python packages:
-pip install roboflowoak
-pip install depthai
-pip install opencv-python
-Now you can use the roboflowoak package to run your custom-trained Roboflow model.
-
-#### Running Inference: Deployment
-If you are deploying to an OAK device without Depth capabilities, set depth=False when instantiating (creating) the rf object. OAKs with Depth have a "D" attached to the model name, i.e. OAK-D, and OAK-D-Lite.
-
-Also, comment out max_depth = np.amax(depth) and cv2.imshow("depth", depth/max_depth)
-
-from roboflowoak import RoboflowOak
-import cv2
-import time
-import numpy as np
-if __name__ == '__main__':
-    # instantiating an object (rf) with the RoboflowOak module
-    rf = RoboflowOak(model="YOUR-MODEL-ID", confidence=0.05, overlap=0.5,
-    version="YOUR-MODEL-VERSION-#", api_key="YOUR-PRIVATE_API_KEY", rgb=True,
-    depth=True, device=None, blocking=True)
-    # Running our model and displaying the video output with detections
-    while True:
-        t0 = time.time()
-        # The rf.detect() function runs the model inference
-        result, frame, raw_frame, depth = rf.detect()
-        predictions = result["predictions"]
-        #{
-        #    predictions:
-        #    [ {
-        #        x: (middle),
-        #        y:(middle),
-        #        width:
-        #        height:
-        #        depth: ###->
-        #        confidence:
-        #        class:
-        #        mask: {
-        #    ]
-        #}
-        #frame - frame after preprocs, with predictions
-        #raw_frame - original frame from your OAK
-        #depth - depth map for raw_frame, center-rectified to the center camera
-        
-        # timing: for benchmarking purposes
-        t = time.time()-t0
-        print("FPS ", 1/t)
-        print("PREDICTIONS ", [p.json() for p in predictions])
-
-        # Setting parameters for depth calculation
-        # comment out the following 2 lines if you're using an OAK without Depth
-        max_depth = np.amax(depth)
-        cv2.imshow("depth", depth/max_depth)
-        # displaying the video feed as successive frames
-        cv2.imshow("frame", frame)
-    
-        # how to close the OAK inference window / stop inference: CTRL+q or CTRL+c
-        if cv2.waitKey(1) == ord('q'):
-            break
-            
-Enter the code below (after replacing the placeholder text with the path to your Python script).
-To close the window (interrupt or end inference), enter CTRL+c on your keyboard.
-
-python3 /path/to/[YOUR-PYTHON-FILE].py
-
-The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the host device averaged around 15 ms or 66 FPS. **Note: The host device used with OAK will drastically impact FPS.** Take this into consideration when creating your system.
-
-
 ## Testing and validating the model using YOLOv8
 Test and validate the model after training using the YOLOv8 command-line interface (CLI). You can use the --weights option to specify the path to your trained model weights, and the --source option to provide the path to your test images or video. The CLI will display the results on the screen and save them in the runs/detect folder.
 
@@ -173,30 +95,30 @@ To deploy a Flask app using Heroku, you need to have some basic knowledge of Git
 
 Here are some general steps to deploy a Flask app using Heroku:
 
--Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You can 
++ Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You can 
  also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
  
--Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
+- Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
  1234.herokuapp.com/. You can also specify a custom name for your app using the --app option, such as heroku create --app flask-app-1234.
  
--Connect your Heroku app to your GitHub repository using the heroku git: remote command in your terminal. This will set up a remote branch called heroku that 
+* Connect your Heroku app to your GitHub repository using the heroku git: remote command in your terminal. This will set up a remote branch called heroku that 
  links to your Heroku app. You can also use the Heroku dashboard to connect your app to your GitHub repository.
  
--Configure your Flask app for deployment by creating some files in your project folder, such as:
++ Configure your Flask app for deployment by creating some files in your project folder, such as:
 
 -A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate 
  this file automatically.
  
--A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the 
+*A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the 
  app object from the app.py file.
  
--A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
++A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
 
 -Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
  build and deployment process on Heroku, which may take a few minutes. You can check the status of your deployment using the heroku logs --tail command or the 
  Heroku dashboard.
  
--Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
+*Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
 
 
 # Acknowledgments
