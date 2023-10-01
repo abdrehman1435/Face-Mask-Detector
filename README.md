@@ -95,8 +95,8 @@ To deploy a Flask app using Heroku, you need to have some basic knowledge of Git
 
 Here are some general steps to deploy a Flask app using Heroku:
 
-+ Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You can 
- also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
++ Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You 
+  can also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
  
 - Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
  1234.herokuapp.com/. You can also specify a custom name for your app using the --app option, such as heroku create --app flask-app-1234.
