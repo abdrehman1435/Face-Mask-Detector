@@ -7,15 +7,116 @@ To use this project, you need to follow these steps:
 Clone this repository to your local machine using git clone https://github.com/your_username/face-mask-detector.git.
 Download and install the required dependencies using pip install -r requirements.txt which is in the repository.
 
-# Collecting data 
+# Collecting data and creating the dataset
 Collect a dataset of images containing people with and without face masks. You can use any source of images, such as online sources, web scraping, or your own camera, or download the dataset zip which is in this repository. You need to have around 3000 images for good performance or at least a minimum of 1000 images.
 Annotate the images using Roboflow, a tool that helps you label, preprocess, and augment your images. You must draw bounding boxes around the masks and label them "Face-Mask". Then you can preprocess the data using the features provided by Roboflow. Next, you can augment the dataset using flip, blur, etc., and the various options provided by Roboflow and download the new dataset.
+
+# Exporting the dataset
+Export your dataset in a format that is compatible with your chosen framework. Roboflow provides ready-to-use export options for YOLOv5, TensorFlow Lite, YOLOv8, and other popular frameworks.
 
 # Training the model using YOLOv8
 Train the model using YOLOv8, a state-of-the-art object detection model from Ultralytics. You can use the command 'pip install ultralytics and then import YOLO from ultralytics' to download. You also need your computer to have a GPU and you need to download valid NVIDIA device drivers and the CUDA toolkit by NVIDIA to use YOLOv8. You need to change the hardware accelerator to GPU. You need to use the custom dataset option and provide the path to your Roboflow dataset and it's more simpler to do this by mounting your Google Drive. You can use the default settings or adjust them according to your needs. The training process will save the model weights in the runs/train folder. This process is shown in the "FaceMask.ipynb" notebook in the repository.
 
 # Alternative training using Roboflow
-The model can also be
+The model can also be trained using Roboflow using the Roboflow-train feature. The object can be trained using a pre-trained model like the COCO dataset or you can train your own custom model after exporting your dataset.
+
+# Deploying your model from Roboflow
+There are multiple ways in which we can deploy the model directly from Roboflow for example using NVIDIA Jetson or IOS device. A few of them are:
+
+# Deploying using NVIDIA Jetson
+Installation
+You can take the edge acceleration version of your model to the NVIDIA Jetson, where you may need real-time speeds with limited hardware resources.
+
+Step #1: Flash Jetson Device
+Ensure that your Jetson is flashed with Jetpack 4.5, 4.6, or 5.1. You can check your existing with this repository from Jetson Hacks
+git clone https://github.com/jetsonhacks/jetsonUtilities.git
+cd jetsonUtilities
+python jetsonInfo.py
+
+Step #2: Run Docker Container
+Next, run the Roboflow Inference Server using the accompanying Docker container:
+sudo docker run --privileged --net=host --runtime=nvidia --mount source=roboflow,target=/tmp/cache -e NUM_WORKERS=1 roboflow/roboflow-inference-server-jetson-4.5.0:latest
+The docker image you need depends on what Jetpack version you are using.
+Jetpack 4.5: roboflow/roboflow-inference-server-jetson-4.5.0
+Jetpack 4.6: roboflow/roboflow-inference-server-jetson-4.6.1
+Jetpack 5.1: roboflow/roboflow-inference-server-jetson-5.1.1
+The Jetson images default to using a CUDA execution provider. To use TensorRT, set the environment variable ONNXRUNTIME_EXECUTION_PROVIDERS=TensorrtExecutionProvider. Note that while using TensorRT can increase performance, it also incurs an additional startup compilation cost.
+
+Step #3: Use the Server
+You can now use the server to run inference on any of your models. The following command shows the syntax for making a request to the inference API via curl:
+base64 your_img.jpg | curl -d @- "http://localhost:9001/[YOUR MODEL]/[YOUR VERSION]?api_key=[YOUR API KEY]"
+When you send a request for the first time, your model will compile on your Jetson device for 5-10 minutes.
+
+# Deploy the Model to the Luxonis OAK
+The Roboflow Inference Server supports the following devices:
+OAK-D 
+OAK-D-Lite
+OAK-D-POE
+OAK-1 (no depth)
+
+Installation
+Install the roboflowoak, depthai, and opencv-python packages:
+pip install roboflowoak
+pip install depthai
+pip install opencv-python
+Now you can use the roboflowoak package to run your custom-trained Roboflow model.
+
+Running Inference: Deployment
+If you are deploying to an OAK device without Depth capabilities, set depth=False when instantiating (creating) the rf object. OAKs with Depth have a "D" attached to the model name, i.e. OAK-D, and OAK-D-Lite.
+Also, comment out max_depth = np.amax(depth) and cv2.imshow("depth", depth/max_depth)
+
+from roboflowoak import RoboflowOak
+import cv2
+import time
+import numpy as np
+
+if __name__ == '__main__':
+    # instantiating an object (rf) with the RoboflowOak module
+    rf = RoboflowOak(model="YOUR-MODEL-ID", confidence=0.05, overlap=0.5,
+    version="YOUR-MODEL-VERSION-#", api_key="YOUR-PRIVATE_API_KEY", rgb=True,
+    depth=True, device=None, blocking=True)
+    # Running our model and displaying the video output with detections
+    while True:
+        t0 = time.time()
+        # The rf.detect() function runs the model inference
+        result, frame, raw_frame, depth = rf.detect()
+        predictions = result["predictions"]
+        #{
+        #    predictions:
+        #    [ {
+        #        x: (middle),
+        #        y:(middle),
+        #        width:
+        #        height:
+        #        depth: ###->
+        #        confidence:
+        #        class:
+        #        mask: {
+        #    ]
+        #}
+        #frame - frame after preprocs, with predictions
+        #raw_frame - original frame from your OAK
+        #depth - depth map for raw_frame, center-rectified to the center camera
+        
+        # timing: for benchmarking purposes
+        t = time.time()-t0
+        print("FPS ", 1/t)
+        print("PREDICTIONS ", [p.json() for p in predictions])
+
+        # Setting parameters for depth calculation
+        # comment out the following 2 lines if you're using an OAK without Depth
+        max_depth = np.amax(depth)
+        cv2.imshow("depth", depth/max_depth)
+        # displaying the video feed as successive frames
+        cv2.imshow("frame", frame)
+    
+        # how to close the OAK inference window / stop inference: CTRL+q or CTRL+c
+        if cv2.waitKey(1) == ord('q'):
+            break
+Enter the code below (after replacing the placeholder text with the path to your Python script)
+# To close the window (interrupt or end inference), enter CTRL+c on your keyboard
+python3 /path/to/[YOUR-PYTHON-FILE].py
+The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the host device averaged around 15 ms or 66 FPS. Note: The host device used with OAK will drastically impact FPS. Take this into consideration when creating your system.
 
 # Testing and validating the model using YOLOv8
 Test and validate the model after training using the YOLOv8 command-line interface (CLI). You can use the --weights option to specify the path to your trained model weights, and the --source option to provide the path to your test images or video. The CLI will display the results on the screen and save them in the runs/detect folder.
@@ -26,9 +127,21 @@ Use the trained model weights and create a program that can detect face masks in
 # Making the Back-end 
 Create a Flask app using Python that can serve as the back-end for your project. You need to import Flask and create an app object using app = Flask(__name__). Then, you need to define routes for your app using decorators such as @app.route('/'). The file dl.py can be used  You can use the render_template function to return HTML files from the templates folder, and the request object to handle user inputs. You also need to use the send_from_directory function to serve static files such as images, CSS, or JavaScript from the static folder.
 
-# Making the Front-end
-Create a front-end for your project using HTML and CSS that can interact with your Flask app. You need to create HTML files in the templates folder that contain the structure and content of your web pages. You can use Bootstrap or other frameworks to style your HTML elements.
 
+# Make the Front-end and run the Flask app
+ Here are some steps you can follow to create a simple Flask app with HTML and CSS as frontend:
+
+-Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.
+-Create a subfolder called templates in your project folder and save your HTML files there. You can use any text editor or IDE to write your HTML code. You can 
+  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the 
+-Create a subfolder called static in your project folder and save your CSS files there. You can use any text editor or IDE to write your CSS code. You can also 
+  use Sass or Less to preprocess your CSS code.
+-Create a Python file called app.py (dl.py in this repository) in your project folder and write your Flask code there. You can use the Flask class to create an app object and the 
+ render_template function to return your HTML files. You can also use the request object to handle user inputs and the url_for function to link your static files.
+-Run your Flask app using the command flask run in your terminal using local host or python dl.py. You should see a message like Running on http://127.0.0.1:5000/.
+
+
+# Creating a GitHub repository and deploying the Flask app using the repository
 
 
 
