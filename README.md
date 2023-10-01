@@ -5,7 +5,7 @@ Face Mask Detector is a project that uses deep learning to detect whether people
 To use this project, you need to follow these steps:
 
 Clone this repository to your local machine using git clone https://github.com/your_username/face-mask-detector.git.
-Download and install the required dependencies using pip install -r requirements.txt which is in the repository.
+Download and install the required dependencies using ```pip install -r requirements.txt``` which is in the repository.
 
 ## Collecting data and creating the dataset
 Collect a dataset of images containing people with and without face masks. You can use any source of images, such as online sources, web scraping, or your own camera, or download the dataset zip which is in this repository. You need to have around 3000 images for good performance or at least a minimum of 1000 images.
@@ -121,7 +121,7 @@ Here are some general steps to deploy a Flask app using Heroku:
 * Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
 
 
-# Acknowledgments
+## Acknowledgments
 This project is inspired by and based on the following sources:
 
 + <a href="https://docs.ultralytics.com/">YOLOv8: Ultralytics Object Detection by Ultralytics</a>
