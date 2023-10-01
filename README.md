@@ -141,12 +141,43 @@ Create a Flask app using Python that can serve as the back-end for your project.
 -Run your Flask app using the command flask run in your terminal using local host or python dl.py. You should see a message like Running on http://127.0.0.1:5000/.
 
 
-# Creating a GitHub repository and deploying the Flask app using the repository
+# Creating a GitHub repository and deploying the Flask app using Render
+Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.
+Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. 
+The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
+pip install -r requirements.txt.
+Create a new Web Service on Render, and give Render permission to access your new repo.
+Use the following values during creation:
+
+Runtime	Python
+Build Command	pip install -r requirements.txt
+Start Command	gunicorn dl: app
+That’s it! Your web service will be live on your Render URL as soon as the build finishes.
+
+# Deploying Flask app using Heroku
+To deploy a Flask app using Heroku, you need to have some basic knowledge of Git, GitHub, and Flask. You also need to install the Heroku CLI and create a Heroku account.
+
+Here are some general steps to deploy a Flask app using Heroku:
+
+-Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You can 
+ also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
+-Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
+ 1234.herokuapp.com/. You can also specify a custom name for your app using the --app option, such as heroku create --app flask-app-1234.
+-Connect your Heroku app to your GitHub repository using the heroku git: remote command in your terminal. This will set up a remote branch called heroku that 
+ links to your Heroku app. You can also use the Heroku dashboard to connect your app to your GitHub repository.
+-Configure your Flask app for deployment by creating some files in your project folder, such as:
+-A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate 
+ this file automatically.
+-A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl:app. This tells Heroku to use the gunicorn web server to run the 
+ app object from the app.py file.
+-A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
+-Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
+ build and deployment process on Heroku, which may take a few minutes. You can check the status of your deployment using the heroku logs --tail command or the 
+ Heroku dashboard.
+-Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
 
 
-
-
-Acknowledgments
+# Acknowledgments
 This project is inspired by and based on the following sources:
 
 [YOLOv8: Ultralytics Object Detection] by Ultralytics
