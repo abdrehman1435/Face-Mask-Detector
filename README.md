@@ -47,12 +47,16 @@ You can now use the server to run inference on any of your models. The following
 base64 your_img.jpg | curl -d @- "http://localhost:9001/[YOUR MODEL]/[YOUR VERSION]?api_key=[YOUR API KEY]"
 When you send a request for the first time, your model will compile on your Jetson device for 5-10 minutes.
 
+
+
 ### Deploy the Model to the Luxonis OAK
 The Roboflow Inference Server supports the following devices:
-OAK-D 
-OAK-D-Lite
-OAK-D-POE
-OAK-1 (no depth)
+<ul>
+<li>OAK-D </li>
+<li>>OAK-D-Lite</li>
+<li>OAK-D-POE</li>
+<li>OAK-1 (no depth)</li>
+</ul>
 
 #### Installation
 Install the roboflowoak, depthai, and opencv-python packages:
@@ -114,10 +118,13 @@ if __name__ == '__main__':
         if cv2.waitKey(1) == ord('q'):
             break
             
-Enter the code below (after replacing the placeholder text with the path to your Python script)
-To close the window (interrupt or end inference), enter CTRL+c on your keyboard
+Enter the code below (after replacing the placeholder text with the path to your Python script).
+To close the window (interrupt or end inference), enter CTRL+c on your keyboard.
+
 python3 /path/to/[YOUR-PYTHON-FILE].py
-The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the host device averaged around 15 ms or 66 FPS. Note: The host device used with OAK will drastically impact FPS. Take this into consideration when creating your system.
+
+The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the host device averaged around 15 ms or 66 FPS. **Note: The host device used with OAK will drastically impact FPS.** Take this into consideration when creating your system.
+
 
 ## Testing and validating the model using YOLOv8
 Test and validate the model after training using the YOLOv8 command-line interface (CLI). You can use the --weights option to specify the path to your trained model weights, and the --source option to provide the path to your test images or video. The CLI will display the results on the screen and save them in the runs/detect folder.
@@ -132,7 +139,7 @@ Create a Flask app using Python that can serve as the back-end for your project.
 ## Make the Front-end and run the Flask app
  Here are some steps you can follow to create a simple Flask app with HTML and CSS as frontend:
 <ul>
-Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.
+<li>Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.</li>
 <li>Create a subfolder called templates in your project folder and save your HTML files there. You can use any text editor or IDE to write your HTML code. You can
   also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the front page of the web 
   application, 'ui.html' which is where the video is inputted by the user in either mp4 or mov format, and 'videoprojectnew.html' is where the Face-Mask-Detector 
@@ -144,21 +151,22 @@ Create a project folder and a virtual environment for your Flask app. You can us
 </ul>
 
 ## Creating a GitHub repository and deploying the Flask app using Render
-Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.
-
-Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. 
-
-The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
-pip install -r requirements.txt.
-
-Create a new Web Service on Render, and give Render permission to access your new repo.
+<ul>
+<li>Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.</li>
+<li>Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. </li>
+<li>The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
+pip install -r requirements.txt.</li>
+<li>Create a new Web Service on Render, and give Render permission to access your new repo.</li>
+</ul>
 
 Use the following values during creation:
 
 Runtime	Python
 Build Command	pip install -r requirements.txt
 Start Command	gunicorn dl: app
+
 That’s it! Your web service will be live on your Render URL as soon as the build finishes.
+
 
 ## Deploying Flask app using Heroku
 To deploy a Flask app using Heroku, you need to have some basic knowledge of Git, GitHub, and Flask. You also need to install the Heroku CLI and create a Heroku account.
