@@ -69,7 +69,6 @@ from roboflowoak import RoboflowOak
 import cv2
 import time
 import numpy as np
-
 if __name__ == '__main__':
     # instantiating an object (rf) with the RoboflowOak module
     rf = RoboflowOak(model="YOUR-MODEL-ID", confidence=0.05, overlap=0.5,
@@ -168,7 +167,7 @@ Here are some general steps to deploy a Flask app using Heroku:
 -Configure your Flask app for deployment by creating some files in your project folder, such as:
 -A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate 
  this file automatically.
--A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl:app. This tells Heroku to use the gunicorn web server to run the 
+-A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the 
  app object from the app.py file.
 -A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
 -Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
@@ -181,4 +180,8 @@ Here are some general steps to deploy a Flask app using Heroku:
 This project is inspired by and based on the following sources:
 
 [YOLOv8: Ultralytics Object Detection] by Ultralytics
+https://docs.roboflow.com/ 
+https://github.com/ultralytics/ultralytics
+https://www.youtube.com/watch?v=pg11wmj8LbY
+https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
