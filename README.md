@@ -35,11 +35,13 @@ python jetsonInfo.py
 
 ##### Step #2: Run Docker Container
 Next, run the Roboflow Inference Server using the accompanying Docker container:
-sudo docker run --privileged --net=host --runtime=nvidia --mount source=roboflow,target=/tmp/cache -e NUM_WORKERS=1 roboflow/roboflow-inference-server-jetson-4.5.0:latest
+`sudo docker run --privileged --net=host --runtime=nvidia --mount source=roboflow,target=/tmp/cache -e NUM_WORKERS=1 roboflow/roboflow-inference-server-jetson-4.5.0:latest`
+
 The docker image you need depends on what Jetpack version you are using.
-Jetpack 4.5: roboflow/roboflow-inference-server-jetson-4.5.0
-Jetpack 4.6: roboflow/roboflow-inference-server-jetson-4.6.1
-Jetpack 5.1: roboflow/roboflow-inference-server-jetson-5.1.1
++ Jetpack 4.5: roboflow/roboflow-inference-server-jetson-4.5.0
+- Jetpack 4.6: roboflow/roboflow-inference-server-jetson-4.6.1
+* Jetpack 5.1: roboflow/roboflow-inference-server-jetson-5.1.1
+
 The Jetson images default to using a CUDA execution provider. To use TensorRT, set the environment variable ONNXRUNTIME_EXECUTION_PROVIDERS=TensorrtExecutionProvider. Note that while using TensorRT can increase performance, it also incurs an additional startup compilation cost.
 
 ##### Step #3: Use the Server
@@ -95,7 +97,7 @@ To deploy a Flask app using Heroku, you need to have some basic knowledge of Git
 
 Here are some general steps to deploy a Flask app using Heroku:
 
-+ Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You 
++ Create a GitHub repository for your Flask app and push your code to it. You can use the `git init`,` git add`, `git commit`, and `git push` commands to do this. You 
   can also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
  
 - Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
@@ -123,12 +125,8 @@ Here are some general steps to deploy a Flask app using Heroku:
 This project is inspired by and based on the following sources:
 
 + <a href="https://docs.ultralytics.com/">YOLOv8: Ultralytics Object Detection by Ultralytics</a>
-
 - https://docs.roboflow.com/ 
-
 * https://github.com/ultralytics/ultralytics
-
 + https://www.youtube.com/watch?v=pg11wmj8LbY
-
 - https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
