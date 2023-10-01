@@ -63,6 +63,7 @@ Now you can use the roboflowoak package to run your custom-trained Roboflow mode
 
 Running Inference: Deployment
 If you are deploying to an OAK device without Depth capabilities, set depth=False when instantiating (creating) the rf object. OAKs with Depth have a "D" attached to the model name, i.e. OAK-D, and OAK-D-Lite.
+
 Also, comment out max_depth = np.amax(depth) and cv2.imshow("depth", depth/max_depth)
 
 from roboflowoak import RoboflowOak
@@ -113,7 +114,7 @@ if __name__ == '__main__':
         if cv2.waitKey(1) == ord('q'):
             break
 Enter the code below (after replacing the placeholder text with the path to your Python script)
-# To close the window (interrupt or end inference), enter CTRL+c on your keyboard
+To close the window (interrupt or end inference), enter CTRL+c on your keyboard
 python3 /path/to/[YOUR-PYTHON-FILE].py
 The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the host device averaged around 15 ms or 66 FPS. Note: The host device used with OAK will drastically impact FPS. Take this into consideration when creating your system.
 
@@ -121,7 +122,7 @@ The inference speed (in milliseconds) with the Apple Macbook Air (M1) as the hos
 Test and validate the model after training using the YOLOv8 command-line interface (CLI). You can use the --weights option to specify the path to your trained model weights, and the --source option to provide the path to your test images or video. The CLI will display the results on the screen and save them in the runs/detect folder.
 
 # Creating a program
-Use the trained model weights and create a program that can detect face masks in real-time using a webcam or a video file. You can use the train.py script in the repository as a reference. You need to import the YOLOv8 module and load your model weights using the best.pt in the results folder. Then, you need to create a loop that captures frames from your webcam or video file, passes them to the model using the predict function, and displays the results using OpenCV.
+Use the trained model weights and create a program that can detect face masks in real-time using a webcam or a video file. You can use the train.py script in the repository as a reference. You need to import the YOLOv8 module and load your model weights using the best.pt in the results folder. Then, you need to create a loop that captures frames from your webcam or video file, passes them to the model using the predict function, and displays the results using OpenCV which draws bounding boxes around the detections and also displays the object identified and the confidence level
 
 # Making the Back-end 
 Create a Flask app using Python that can serve as the back-end for your project. You need to import Flask and create an app object using app = Flask(__name__). Then, you need to define routes for your app using decorators such as @app.route('/'). The file dl.py can be used  You can use the render_template function to return HTML files from the templates folder, and the request object to handle user inputs. You also need to use the send_from_directory function to serve static files such as images, CSS, or JavaScript from the static folder.
@@ -131,21 +132,30 @@ Create a Flask app using Python that can serve as the back-end for your project.
  Here are some steps you can follow to create a simple Flask app with HTML and CSS as frontend:
 
 -Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.
+
 -Create a subfolder called templates in your project folder and save your HTML files there. You can use any text editor or IDE to write your HTML code. You can 
-  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the 
+  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the front page of the web 
+  application, 'ui.html' which is where the video is inputted by the user in either mp4 or mov format, and 'videoprojectnew.html' is where the Face-Mask-Detector 
+  model is applied and the video is outputted with the bounding boxes and confidence level.
+  
 -Create a subfolder called static in your project folder and save your CSS files there. You can use any text editor or IDE to write your CSS code. You can also 
   use Sass or Less to preprocess your CSS code.
--Create a Python file called app.py (dl.py in this repository) in your project folder and write your Flask code there. You can use the Flask class to create an app object and the 
- render_template function to return your HTML files. You can also use the request object to handle user inputs and the url_for function to link your static files.
+  
+-Create a Python file called app.py (dl.py in this repository) in your project folder and write your Flask code there. You can use the Flask class to create an app object and the render_template function to return your HTML files. You can also use the request object to handle user inputs and the url_for function to link your static files.
+
 -Run your Flask app using the command flask run in your terminal using local host or python dl.py. You should see a message like Running on http://127.0.0.1:5000/.
 
 
 # Creating a GitHub repository and deploying the Flask app using Render
 Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.
+
 Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. 
+
 The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
 pip install -r requirements.txt.
+
 Create a new Web Service on Render, and give Render permission to access your new repo.
+
 Use the following values during creation:
 
 Runtime	Python
@@ -160,19 +170,27 @@ Here are some general steps to deploy a Flask app using Heroku:
 
 -Create a GitHub repository for your Flask app and push your code to it. You can use the git init, git add, git commit, and git push commands to do this. You can 
  also, use tools like GitHub Desktop or Visual Studio Code to manage your GitHub repository.
+ 
 -Create a Heroku app using the heroku create command in your terminal. This will generate a unique name and URL for your app, such as https://flask-app- 
  1234.herokuapp.com/. You can also specify a custom name for your app using the --app option, such as heroku create --app flask-app-1234.
+ 
 -Connect your Heroku app to your GitHub repository using the heroku git: remote command in your terminal. This will set up a remote branch called heroku that 
  links to your Heroku app. You can also use the Heroku dashboard to connect your app to your GitHub repository.
+ 
 -Configure your Flask app for deployment by creating some files in your project folder, such as:
+
 -A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate 
  this file automatically.
+ 
 -A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the 
  app object from the app.py file.
+ 
 -A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
+
 -Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
  build and deployment process on Heroku, which may take a few minutes. You can check the status of your deployment using the heroku logs --tail command or the 
  Heroku dashboard.
+ 
 -Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
 
 
@@ -181,7 +199,10 @@ This project is inspired by and based on the following sources:
 
 [YOLOv8: Ultralytics Object Detection] by Ultralytics
 https://docs.roboflow.com/ 
+
 https://github.com/ultralytics/ultralytics
+
 https://www.youtube.com/watch?v=pg11wmj8LbY
+
 https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
