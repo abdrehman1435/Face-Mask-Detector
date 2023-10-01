@@ -83,9 +83,9 @@ pip install -r requirements.txt.</li>
 
 Use the following values during creation:
 
-Runtime	Python
-Build Command	pip install -r requirements.txt
-Start Command	gunicorn dl: app
+Runtime:	**Python**
+Build Command:	**pip install -r requirements.txt**
+Start: Command:	**gunicorn dl: app**
 
 That’s it! Your web service will be live on your Render URL as soon as the build finishes.
 
@@ -122,12 +122,13 @@ Here are some general steps to deploy a Flask app using Heroku:
 # Acknowledgments
 This project is inspired by and based on the following sources:
 
-[YOLOv8: Ultralytics Object Detection] by Ultralytics
-https://docs.roboflow.com/ 
++ <a href="https://docs.ultralytics.com/">YOLOv8: Ultralytics Object Detection by Ultralytics</a>
 
-https://github.com/ultralytics/ultralytics
+- https://docs.roboflow.com/ 
 
-https://www.youtube.com/watch?v=pg11wmj8LbY
+* https://github.com/ultralytics/ultralytics
 
-https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
++ https://www.youtube.com/watch?v=pg11wmj8LbY
+
+- https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
