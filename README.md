@@ -106,19 +106,17 @@ Here are some general steps to deploy a Flask app using Heroku:
  
 + Configure your Flask app for deployment by creating some files in your project folder, such as:
 
--A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate 
- this file automatically.
+- A requirements.txt file that lists the dependencies of your app, such as Flask, gunicorn, etc. You can use the pip freeze > requirements.txt command to generate this file automatically.
  
-*A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the 
- app object from the app.py file.
+* A Procfile file that specifies the command to run your app on Heroku, such as web: gunicorn dl: app. This tells Heroku to use the gunicorn web server to run the  app object from the app.py file.
  
-+A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
++ A runtime.txt file that specifies the Python version to use on Heroku, such as python-3.9.7. You can check the supported Python versions on Heroku.
 
--Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
+- Deploy your Flask app to Heroku by pushing your code to the heroku remote branch using the git push heroku main command in your terminal. This will trigger the 
  build and deployment process on Heroku, which may take a few minutes. You can check the status of your deployment using the heroku logs --tail command or the 
  Heroku dashboard.
  
-*Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
+* Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
 
 
 # Acknowledgments
