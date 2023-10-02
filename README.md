@@ -117,7 +117,20 @@ Here are some general steps to deploy a Flask app using Heroku:
  Heroku dashboard.
  
 * Visit your Heroku app URL in your browser and you should see your Flask app running on the cloud.
+  
 
+## Output
+We input the video in which we want to detect Face-masks and then click on **submit** and the output shall be displayed by drawing a bounding box around every face mask present along with the object name which is "Face Mask" and the confidence level of the detection frame by frame of the video.
+
+### Sample Input Videos 
+![](static/images/s1.jpg)
+![](static/images/s2.jpg)
+
+### Sample Output
+![](static/images/ex3.png)
+![](static/images/ex4.png)
+
+<br><br>
 
 ## Acknowledgments
 This project is inspired by and based on the following sources:
