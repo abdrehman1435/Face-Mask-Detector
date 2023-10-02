@@ -54,7 +54,7 @@ When you send a request for the first time, your model will compile on your Jets
 Test and validate the model after training using the YOLOv8 command-line interface (CLI). You can use the --weights option to specify the path to your trained model weights, and the --source option to provide the path to your test images or video. The CLI will display the results on the screen and save them in the **runs/detect** folder.
 
 ## Creating a program
-Use the trained model weights and create a program that can detect face masks in real-time using a webcam or a video file. You can use the **train.py** script in the repository as a reference. You need to import the YOLOv8 module and load your model weights using the **best.pt** in the results folder. Then, you need to create a loop that captures frames from your webcam or video file, passes them to the model using the predict function, and displays the results using OpenCV which draws bounding boxes around the detections and also displays the object identified and the confidence level
+Use the trained model weights and create a program that can detect face masks in real-time using a webcam or a video file. You can use the **train.py** script in the repository as a reference. You need to import the YOLOv8 module and load your model weights using the **best.pt** in the results folder. Then, you need to create a loop that captures frames from your webcam or video file, passes them to the model using the predict function, and displays the results using OpenCV which draws bounding boxes around the detections and also displays the object identified and the confidence level.
 
 ## Making the Flask app
 Create a Flask app using Python that can serve as the back-end for your project. You need to import Flask and create an app object using `app = Flask(__name__)`. Then, you need to define routes for your app using decorators such as `@app.route('/')`. The file dl.py can be used  You can use the **render_template** function to return HTML files from the templates folder, and the request object to handle user inputs. You also need to use the **send_from_directory** function to serve static files such as images, CSS, or JavaScript from the static folder.
@@ -65,9 +65,8 @@ Create a Flask app using Python that can serve as the back-end for your project.
 <ul>
 <li>Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.</li>
 <li>Create a subfolder called templates in your project folder and save your HTML files there. You can use any text editor or IDE to write your HTML code. You can
-  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely **indexpage.html** which is the front page of the web 
-  application, **ui.html** which is where the video is inputted by the user in either mp4 or mov format, and **videoprojectnew.html** is where the Face-Mask-Detector 
-  model is applied and the video is outputted with the bounding boxes and confidence level.</li>
+  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the front page of the web 
+  application, 'ui.html' which is where the video is inputted by the user in either mp4 or mov format, and 'videoprojectnew.html' is where the Face-Mask-Detector model is applied and the video is outputted with the bounding boxes and confidence level.</li>
 <li>Create a subfolder called static in your project folder and save your CSS files there. You can use any text editor or IDE to write your CSS code. You can also
   use Sass or Less to preprocess your CSS code.</li>
 <li>Create a Python file called app.py (dl.py in this repository) in your project folder and write your Flask code there. You can use the Flask class to create an app object and the render_template function to return your HTML files. You can also use the request object to handle user inputs and the url_for function to link your static files.</li>
@@ -128,4 +127,6 @@ This project is inspired by and based on the following sources:
 * <a href="https://github.com/ultralytics/ultralytics">Training YOLOv8 on custom dataset</a>
 + <a href="https://www.youtube.com/watch?v=pg11wmj8LbY">Deploying Flask app using Render</a>
 - <a href="https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/">How to build a web application using Flask</a>
+
+
 
