@@ -5,7 +5,7 @@ Face Mask Detector is a project that uses deep learning to detect whether people
 To use this project, you need to follow these steps:
 
 Clone this repository to your local machine using git clone https://github.com/your_username/face-mask-detector.git.
-Download and install the required dependencies using ```pip install -r requirements.txt``` which is in the repository.
+Download and install the required dependencies using ``` pip install -r requirements.txt``` which is in the repository.
 
 ## Collecting data and creating the dataset
 Collect a dataset of images containing people with and without face masks. You can use any source of images, such as online sources, web scraping, or your own camera, or download the dataset zip which is in this repository. You need to have around 3000 images for good performance or at least a minimum of 1000 images.
@@ -78,8 +78,8 @@ Create a Flask app using Python that can serve as the back-end for your project.
 <ul>
 <li>Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.</li>
 <li>Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. </li>
-<li>The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
-`pip install -r requirements.txt ` .</li>
++ The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
+  pip install -r requirements.txt.
 <li>Create a new Web Service on Render, and give Render permission to access your new repo.</li>
 </ul>
 
@@ -124,8 +124,8 @@ Here are some general steps to deploy a Flask app using Heroku:
 This project is inspired by and based on the following sources:
 
 + <a href="https://docs.ultralytics.com/">YOLOv8: Ultralytics Object Detection by Ultralytics</a>
-- https://docs.roboflow.com/ 
-* https://github.com/ultralytics/ultralytics
-+ https://www.youtube.com/watch?v=pg11wmj8LbY
-- https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
+- <a href="https://docs.roboflow.com/">Annotating data using Roboflow</a>
+* <a href="https://github.com/ultralytics/ultralytics">Training YOLOv8 on custom dataset</a>
++ <a href="https://www.youtube.com/watch?v=pg11wmj8LbY">Deploying Flask app using Render</a>
+- <a href="https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/">How to build a web application using Flask</a>
 
