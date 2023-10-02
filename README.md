@@ -56,7 +56,7 @@ Test and validate the model after training using the YOLOv8 command-line interfa
 ## Creating a program
 Use the trained model weights and create a program that can detect face masks in real-time using a webcam or a video file. You can use the **train.py** script in the repository as a reference. You need to import the YOLOv8 module and load your model weights using the **best.pt** in the results folder. Then, you need to create a loop that captures frames from your webcam or video file, passes them to the model using the predict function, and displays the results using OpenCV which draws bounding boxes around the detections and also displays the object identified and the confidence level
 
-## Making the Back-end 
+## Making the Flask app
 Create a Flask app using Python that can serve as the back-end for your project. You need to import Flask and create an app object using `app = Flask(__name__)`. Then, you need to define routes for your app using decorators such as `@app.route('/')`. The file dl.py can be used  You can use the **render_template** function to return HTML files from the templates folder, and the request object to handle user inputs. You also need to use the **send_from_directory** function to serve static files such as images, CSS, or JavaScript from the static folder.
 
 
@@ -65,8 +65,8 @@ Create a Flask app using Python that can serve as the back-end for your project.
 <ul>
 <li>Create a project folder and a virtual environment for your Flask app. You can use pip or conda to install Flask and other dependencies.</li>
 <li>Create a subfolder called templates in your project folder and save your HTML files there. You can use any text editor or IDE to write your HTML code. You can
-  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely 'indexpage.html' which is the front page of the web 
-  application, 'ui.html' which is where the video is inputted by the user in either mp4 or mov format, and 'videoprojectnew.html' is where the Face-Mask-Detector 
+  also, use Bootstrap or other frameworks to style your HTML elements. Here I used 3 HTML pages namely **indexpage.html** which is the front page of the web 
+  application, **ui.html** which is where the video is inputted by the user in either mp4 or mov format, and **videoprojectnew.html** is where the Face-Mask-Detector 
   model is applied and the video is outputted with the bounding boxes and confidence level.</li>
 <li>Create a subfolder called static in your project folder and save your CSS files there. You can use any text editor or IDE to write your CSS code. You can also
   use Sass or Less to preprocess your CSS code.</li>
@@ -78,16 +78,16 @@ Create a Flask app using Python that can serve as the back-end for your project.
 <ul>
 <li>Create a GitHub account if you don’t have one already. You can sign up for free at GitHub.</li>
 <li>Create a new repository on GitHub by clicking the [New] button on the top left corner of the page. You can name your repository as you like, such as “flask-app”. You can also add a description, a README file, a license, and a .gitignore file for Python. </li>
-+ The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
-  pip install -r requirements.txt.
+<li> The code uses Gunicorn to serve your app in a production setting. Install Flask, Gunicorn, and other dependencies using the command 
+  pip install -r requirements.txt.</li>
 <li>Create a new Web Service on Render, and give Render permission to access your new repo.</li>
 </ul>
 
 Use the following values during creation:
 
-Runtime:	**Python**
-Build Command:	**pip install -r requirements.txt**
-Start: Command:	**gunicorn dl: app**
+Runtime:	**Python**<br>
+Build Command:	**pip install -r requirements.txt**<br>
+Start: Command:	**gunicorn dl: app**<br>
 
 That’s it! Your web service will be live on your Render URL as soon as the build finishes.
 
